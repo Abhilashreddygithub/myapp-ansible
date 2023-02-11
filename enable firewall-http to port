@@ -1,0 +1,30 @@
+hosts: all
+tasks: 
+   - name: install firewalld,httpd and enable ports for http
+      yum: 
+        name: 
+            - firewalld
+            - httpd
+        state: latest   
+
+   - name: Install welcome page
+     copy: welcome to Ansible world
+     dest: /var/test/webserver
+  
+   - name: start httpd services
+     service:
+        name: httpd
+        enabled: true
+        state: started
+        
+   - name: start forewalld services
+     service:
+        name: firewalld
+        enabled: true
+        state: started
+        
+   - name: open firewalld
+        service: http
+        permenant: true
+        state: enabled
+        immediate: yes    
